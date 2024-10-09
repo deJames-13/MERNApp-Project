@@ -9,4 +9,4 @@
 - [ ] Cloudinary: User Avatar
 
 - [ ] Tranasaction: Cart
-
+- [ ] CRUD 
