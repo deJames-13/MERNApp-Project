@@ -9,4 +9,7 @@
 - [ ] Cloudinary: User Avatar
 
 - [ ] Tranasaction: Cart
-
+- [ ] CRUD
+- [ ] Charts
+- [ ] Formik and yup validation
+- [ ] Order Table
