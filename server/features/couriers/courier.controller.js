@@ -19,15 +19,7 @@ class CourierController extends Controller {
     const resource = this.resource?.make(data) || data;
     this.success({ res, message: 'Data fetched!', resource });
   };
-
-  // store = async (req, res) => {
-  //   const validData = await this.validator(req, res, this.rules.create);
-  //   const data = await this.service?.create(validData);
-  //   if (!data._id) return this.error({ res, message: 'Invalid data!' });
-
-  //   const resource = this.resource?.make(data) || data;
-  //   this.success({ res, message: 'Data created!', resource });
-  // };
 }
 
 export default new CourierController();
+
