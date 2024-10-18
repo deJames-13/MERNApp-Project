@@ -1,5 +1,5 @@
 import { Schema } from '#lib';
-import { imageSchema } from '#utils';
+import { ImageSchema } from '#utils';
 
 const Category = new Schema({
   name: 'Category',
@@ -13,7 +13,7 @@ const Category = new Schema({
       slug: {
         type: String,
       },
-      image: [{ imageSchema }],
+      image: [{ ImageSchema }],
     },
     { timestamps: true },
   ],
@@ -23,3 +23,4 @@ Category.statics.fillables = [];
 Category.statics.hidden = [];
 
 export default Category.makeModel();
+

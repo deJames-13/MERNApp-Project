@@ -101,8 +101,6 @@ import { Button } from 'react-daisyui';
 import { FaPlus } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import { Carousel } from 'react-responsive-carousel';
-import 'react-responsive-carousel/lib/styles/carousel.min.css'; // Import the carousel styles
 import { supplierApi } from '../supplier.api';
 import SupplierWrapper from './SupplierWrapper';
 
@@ -171,15 +169,6 @@ const SupplierTable = () => {
         <Table
           data={suppliers.map((supplier) => ({
             ...supplier,
-            image: (
-              <Carousel showThumbs={false} showIndicators={true} infiniteLoop>
-                {supplier.image.map((image, index) => (
-                  <div key={index}>
-                    <img src={image} alt={`Supplier Image ${index + 1}`} />
-                  </div>
-                ))}
-              </Carousel>
-            ),
             actions: (
               <ActionButtons
                 key={'action_' + supplier.slug}

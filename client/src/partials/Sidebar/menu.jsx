@@ -9,9 +9,11 @@ const makeMenu = () => [
     icon: <FaHome />,
   },
   // NEW ROUTE HERE ->
-    ...features.brandMenus,
-    ...features.courierMenus,
-    ...features.supplierMenus,
+  ...features._exampleMenus,
+  ...features.productMenus,
+  ...features.brandMenus,
+  ...features.courierMenus,
+  ...features.supplierMenus,
   ...features.categoryMenus,
   ...features.userMenus,
 ];

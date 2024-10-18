@@ -13,7 +13,7 @@ const storage = new CloudinaryStorage({
     const folder = req?.headers?.resource || 'uploads';
     const sanitizedFilename = file?.originalname.replace(/[^a-zA-Z0-9]/g, '_');
     const public_id = `${sanitizedFilename}_${uuidv4()}`;
-    const secure_url = cloudinary.url(public_id, { secure: true });
+    const secure_url = cloudinary.url(`${folder}/${public_id}`, { secure: true });
 
     cloudinary.api.create_folder(folder, (error) => {
       if (error) {
@@ -26,6 +26,7 @@ const storage = new CloudinaryStorage({
     const cloudinaryOptions = {
       folder,
       public_id,
+      url: cloudinary.url(`${folder}/${public_id}`),
       resource_type: 'auto',
       secure_url,
       tags,
@@ -39,20 +40,17 @@ const storage = new CloudinaryStorage({
   },
 });
 
-const deleteFile = async (publicId) => {
-  await cloudinary.uploader.destroy(publicId);
-};
-
-const deleteFileOnError = async (req, res, next) => {
-  try {
-    await next();
-  } catch (error) {
-    await deleteFile(req.file.public_id);
-    throw error;
-  }
-};
-
-export const upload = multer({ storage });
-
-export { deleteFile, deleteFileOnError };
+export const upload = multer({
+  storage,
+  limits: { fileSize: 1024 * 1024 * 10 },
+  fileFilter: (req, file, cb) => {
+    const allowed_formats = ['jpg', 'png', 'jpeg', 'gif', 'webp'];
+    const format = file.mimetype.split('/')[1];
+    if (allowed_formats.includes(format)) {
+      cb(null, true);
+    } else {
+      cb(new Error('Invalid file format!'));
+    }
+  },
+});
 

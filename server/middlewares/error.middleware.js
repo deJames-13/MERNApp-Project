@@ -1,5 +1,6 @@
 import { NODE_ENV } from '#config';
 import { APP } from '#constants';
+import * as utils from '#utils';
 
 export const notFound = (req, res, next) => {
   const error = new Error(`Not Found - ${req.originalUrl}`);
@@ -8,9 +9,15 @@ export const notFound = (req, res, next) => {
 };
 
 // eslint-disable-next-line no-unused-vars
-export const errorMiddleware = (err, req, res, next) => {
+export const errorMiddleware = async (err, req, res, next) => {
   let statusCode = err?.statusCode || 500;
   let message = err.message || 'Internal Server Error';
+
+  // if there are files in cloudinary, delete them
+  if (err && (req.file || req.files)) {
+    const publicIds = req.files.map((image) => `${image.folder}/${image.public_id}`);
+    await utils.deleteFiles(publicIds);
+  }
 
   if (err.name === 'CastError' && err.kind === 'ObjectId') {
     statusCode = 404;

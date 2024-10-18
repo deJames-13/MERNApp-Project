@@ -4,6 +4,12 @@ export class Service {
   fieldToSlugify = null;
   slugField = 'slug';
 
+  constructor() {
+    this.model = this.model || null;
+    this.fieldToSlugify = this.fieldToSlugify || null;
+    this.slugField = this.slugField;
+  }
+
   _checkModel() {
     if (!this.model) throw new Error('Resource not set.');
   }
@@ -13,6 +19,11 @@ export class Service {
     const hasFieldToSlugify =
       this.fieldToSlugify && this.model.schema.paths[this.fieldToSlugify];
     return hasSlug && hasFieldToSlugify;
+  }
+
+  hasField(field) {
+    const hasField = this.imageField && this.model.schema.paths[field];
+    return hasField;
   }
 
   slugParams(field) {

@@ -1,5 +1,5 @@
 import { Schema } from '#lib';
-import { imageSchema } from '#utils';
+import { ImageSchema } from '#utils';
 
 const Brand = new Schema({
   name: 'Brand',
@@ -17,7 +17,7 @@ const Brand = new Schema({
         type: String,
         required: [true, 'Brand description is required'],
       },
-      image: [{ imageSchema }],
+      image: [{ ImageSchema }],
     },
     { timestamps: true },
   ],
@@ -27,3 +27,4 @@ Brand.statics.fillables = [];
 Brand.statics.hidden = [];
 
 export default Brand.makeModel();
+

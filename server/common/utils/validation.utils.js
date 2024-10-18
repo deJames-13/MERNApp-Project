@@ -35,7 +35,11 @@ export const validate = async (req, res, validationRules) => {
  * @returns {Promise<void>} - A promise that resolves when the check is complete.
  */
 export const unique = async (model, field, value, excludeId, filter) => {
-  const record = await model.findOne({ [field]: value, _id: { $ne: excludeId }, ...filter });
+  const record = await model.findOne({
+    [field]: value,
+    _id: { $ne: excludeId },
+    ...filter,
+  });
   if (record) {
     throw new Error(`${field} must be unique`);
   }

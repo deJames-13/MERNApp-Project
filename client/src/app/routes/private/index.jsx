@@ -1,7 +1,7 @@
 import * as features from '@features';
 import { PrivateLayout } from '@layouts';
 import { Dashboard } from '@screens';
-
+console.log(features);
 const privateRoutes = [
   {
     path: '/',
@@ -12,11 +12,13 @@ const privateRoutes = [
         element: <Dashboard />,
       },
       // NEW ROUTE HERE ->
-    ...features.brandRoutes,
-    ...features.courierRoutes,
-    ...features.supplierRoutes,
-    ...features.categoryRoutes,
-    ...features.userRoutes,
+      ...features._exampleRoutes,
+      ...features.productRoutes,
+      ...features.brandRoutes,
+      ...features.courierRoutes,
+      ...features.supplierRoutes,
+      ...features.categoryRoutes,
+      ...features.userRoutes,
     ],
   },
 ];
