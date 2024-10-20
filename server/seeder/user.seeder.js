@@ -9,9 +9,9 @@ class UserSeeder extends Seeder {
   custom() {
     return [
       {
-        username: 'admin',
-        email: 'admin@shoeshable.com',
-        password: 'admin123',
+        username: process.env.ADMIN_USERNAME,
+        email: process.env.ADMIN_EMAIL,
+        password: process.env.ADMIN_PASSWORD,
       },
     ];
   }
