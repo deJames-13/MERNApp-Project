@@ -1,6 +1,6 @@
 import { Resource } from '#lib';
 export default class CourierResource extends Resource {
-  transform(courier) {
+  async transform(courier) {
     const { _id, ...rest } = courier;
     return {
       id: _id,
@@ -8,3 +8,4 @@ export default class CourierResource extends Resource {
     };
   }
 }
+

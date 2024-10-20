@@ -1,9 +1,10 @@
+import isEqual from 'lodash/isEqual';
+import PropTypes from 'prop-types';
+
 import { useSlug } from '@common';
 import { FormikForm } from '@common/components';
 import { confirmSave, requestError, toFormData } from '@custom';
 import { CarouselComponent } from '@custom/components';
-import isEqual from 'lodash/isEqual';
-import PropTypes from 'prop-types';
 import { useEffect, useMemo, useState } from 'react';
 import { Button } from 'react-daisyui';
 import { useNavigate } from 'react-router-dom';
@@ -100,12 +101,14 @@ const ProductForm = ({ title = 'Product Form', action = 'create' }) => {
     >
       <div className="flex flex-col gap-4 lg:flex-row items-center lg:items-start">
 
-        <div className="container lg:w-1/3 w-96">
-          <CarouselComponent images={
+        <div className="container lg:w-1/3 w-96 aspect-square">
+          <CarouselComponent imageList={
             product?.images?.length ?
               product?.images.map((image) => ({ src: image.url, alt: image.alt }))
               : images} />
         </div>
+
+
         <div className="container w-2/3">
 
           <FormikForm

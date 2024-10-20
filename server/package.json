@@ -4,8 +4,8 @@
   "description": "A starter template for Express Server projects, for personal use only",
   "type": "module",
   "scripts": {
-    "start": "node server.js",
-    "dev": "nodemon server.js",
+    "start": "tsx api/index.ts",
+    "dev": "nodemon --exec tsx api/index.ts -e js,ts,json",
     "lint": "eslint . "
   },
   "repository": {
@@ -47,9 +47,15 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.9.0",
+    "@faker-js/faker": "^9.0.3",
+    "@types/node": "^22.7.7",
     "eslint": "^9.9.0",
     "globals": "^15.9.0",
-    "nodemon": "^3.1.4"
+    "nodemon": "^3.1.4",
+    "ts-node": "^10.9.2",
+    "tsconfig-paths": "^4.2.0",
+    "tsx": "^4.19.1",
+    "typescript": "^5.6.3"
   },
   "keywords": [
     "express",

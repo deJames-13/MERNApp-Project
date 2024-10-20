@@ -25,7 +25,7 @@ function PrivateLayout() {
             visible={!visible}
           />
           <div className="relative w-full">
-            <div className="container grid min-h-screen mx-auto place-items-center">
+            <div className="w-full grid min-h-screen mx-auto place-items-center">
               <Suspense fallback={<div>Loading...</div>}>
                 <Outlet context={{ userInfo }} />
               </Suspense>

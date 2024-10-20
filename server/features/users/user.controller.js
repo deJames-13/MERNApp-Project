@@ -19,7 +19,7 @@ class UserController extends Controller {
     this.success({
       res,
       message: 'Token refreshed!',
-      user: this.resource.make(req.user),
+      user: await this.resource.make(req.user),
       token: token[1],
     });
   };
@@ -35,7 +35,7 @@ class UserController extends Controller {
     this.success({
       res,
       message: 'Registered!',
-      user: this.resource.make(user),
+      user: await this.resource.make(user),
       token: token[1],
     });
   };
@@ -51,7 +51,7 @@ class UserController extends Controller {
     this.success({
       res,
       message: 'Authenticated!',
-      user: this.resource.make(user),
+      user: await this.resource.make(user),
       token: token[1],
     });
   };
@@ -70,7 +70,7 @@ class UserController extends Controller {
     this.success({
       res,
       message: 'Profile fetch successfully!',
-      user: this.resource.make(user),
+      user: await this.resource.make(user),
       token: getBearerToken(req),
     });
   };
@@ -82,7 +82,7 @@ class UserController extends Controller {
     this.success({
       res,
       message: 'Profile updated!',
-      user: this.resource.make(user),
+      user: await this.resource.make(user),
       token: getBearerToken(req),
     });
   };
@@ -117,7 +117,7 @@ class UserController extends Controller {
     this.success({
       res,
       message: 'Password reset!',
-      user: this.resource.make(user),
+      user: await this.resource.make(user),
       token: newToken[1],
     });
   };

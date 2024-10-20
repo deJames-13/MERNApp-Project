@@ -16,5 +16,5 @@ export const authRoutes = [
   {
     path: '/verify-email',
     element: <Auth page="verify-email" />,
-  }  
+  }
 ];

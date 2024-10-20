@@ -4,7 +4,7 @@ function FooterWrapper({ ...args }) {
   return (
     <>
       <Footer
-        className="p-10 mt-12 bg-neutral text-neutral-content"
+        className="p-10 bg-neutral text-neutral-content"
         {...args}
       >
         <div>

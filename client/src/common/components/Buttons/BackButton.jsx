@@ -1,11 +1,12 @@
+import { cn } from '@common/lib/utils';
 import { useNavigate } from 'react-router-dom';
-
-function BackButton() {
+function BackButton({ className, ...props }) {
   const navigate = useNavigate();
   return (
     <button
       onClick={() => navigate(-1)}
-      className="btn btn-primary"
+      className={cn("btn btn-primary", className)}
+      {...props}
     >
       Back
     </button>

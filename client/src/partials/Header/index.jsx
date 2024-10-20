@@ -2,59 +2,66 @@ import { TextRainbow, ThemeToggler } from '@common/components';
 import { AuthLogout } from '@features';
 import { PropTypes } from 'prop-types';
 import { Dropdown, Navbar } from 'react-daisyui';
-import { FaBars } from 'react-icons/fa';
+import { FaBars, FaCartArrowDown, FaSearch, FaUser } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 
-const MenuList = () => {
+const defaultMenus = [
+  { name: 'Search', link: '/', icon: <FaSearch />, },
+  { name: 'Cart', link: '/cart', icon: <FaCartArrowDown /> },
+  { name: 'Profile', link: '/profile', icon: <FaUser /> }
+]
+
+const MenuList = ({ menus = defaultMenus, iconOnly = false }) => {
   return (
     <>
-      <Link
-        to="/"
-        className="btn btn-ghost"
-      >
-        Home
-      </Link>
-      <Link
-        to="/dashboard"
-        className="btn btn-ghost"
-      >
-        Dashboard
-      </Link>
-      <Link
-        to="/about"
-        className="btn btn-ghost"
-      >
-        About
-      </Link>
+      {menus.map((menu, index) => (
+        <Link
+          key={index}
+          to={menu.link}
+          className="btn btn-ghost rounded-btn group p-0 lg:p-3 hover:text-primary"
+        >
+          <span className="text-lg group-hover:text-primary">
+            {menu.icon}
+          </span>
+          <span className="text-sm">
+            {iconOnly ? '' : menu.name}
+          </span>
+        </Link>
+      ))}
     </>
   );
 };
-
 function Header({ clickLogo }) {
   return (
     <>
       <Navbar className="sticky z-[69] top-0 w-full bg-base-200">
         <Navbar.Start>
-          <Dropdown className=" md:hidden">
+          <Dropdown className="lg:hidden">
             <Dropdown.Toggle>
               <FaBars />
             </Dropdown.Toggle>
-            <Dropdown.Menu className="border border-gray-400 rounded border-opacity-30 bg-base-200 w-52">
+            <Dropdown.Menu className="items-center border border-gray-400 rounded border-opacity-30 bg-base-200 w-52">
               <MenuList />
+              <AuthLogout className="btn btn-ghost rounded-btn group p-0 lg:p-3 hover:text-primary" />
             </Dropdown.Menu>
           </Dropdown>
           <TextRainbow
-            text="ACME"
-            className="text-xl font-extrabold btn btn-ghost"
+            text="ShoeShable"
+            className="text-xl font-extrabold font-display btn btn-ghost "
             onClick={clickLogo}
           />
-          <ThemeToggler />
+          <span className='hidden lg:flex'>
+            <ThemeToggler />
+          </span>
         </Navbar.Start>
-        <Navbar.Center className="hidden lg:flex">
-          <MenuList />
-        </Navbar.Center>
-        <Navbar.End>
-          <AuthLogout />
+        <Navbar.End className='w-full'>
+          <div className="hidden lg:flex">
+            <MenuList />
+            <AuthLogout />
+          </div>
+          <div className="lg:hidden">
+            <MenuList iconOnly={true} />
+          </div>
         </Navbar.End>
       </Navbar>
     </>
@@ -67,3 +74,4 @@ Header.propTypes = {
 
 export default Header;
 export { default as DashboardHeader } from './DashboardHeader';
+

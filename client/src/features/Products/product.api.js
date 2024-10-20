@@ -12,11 +12,13 @@ const headers = {
 const productApi = apiSlice.injectEndpoints({
   endpoints: (build) => ({
     getProducts: build.mutation({
-      query: () => ({
-        url: apiUrl,
-        method: 'GET',
-        headers,
-      }),
+      query: (qStr) => {
+        return {
+          url: `${apiUrl}${qStr ? `?${qStr}` : ''}`,
+          method: 'GET',
+          headers,
+        };
+      },
     }),
     getProduct: build.mutation({
       query: (slug) => ({

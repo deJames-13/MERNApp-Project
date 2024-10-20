@@ -10,7 +10,6 @@ import BrandWrapper from './BrandWrapper';
 
 const allowedColumns = () => [
   { key: 'name', label: 'Name' },
-  { key: 'description', label: 'Description' },
   { key: 'actions', label: '' },
   // More columns can be added here
 ];

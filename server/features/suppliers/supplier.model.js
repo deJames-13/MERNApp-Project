@@ -23,7 +23,7 @@ const Supplier = new Schema({
         required: [true, 'Please enter supplier contact number'],
         // maxLength: [11, 'Courier contact number cannot exceed 11 characters']
       },
-      image: [{ ImageSchema }],
+      images: [ImageSchema],
     },
     { timestamps: true },
   ],

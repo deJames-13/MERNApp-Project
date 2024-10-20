@@ -6,6 +6,13 @@ class UserService extends Service {
   model = UserModel;
   authToken = 'jwt';
 
+  async getAuthenticatedUser(userId) {
+    const token = generateToken(userId, this.authToken);
+    const user = await this.model?.findById(token.id);
+    if (!user) throw new Errors.Unauthorized('User not found!');
+    return user;
+  }
+
   async refreshToken(userId) {
     const token = generateToken(userId, this.authToken);
     return token;

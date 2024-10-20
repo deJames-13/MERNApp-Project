@@ -11,7 +11,7 @@ function AboutSection() {
           <div className="py-4">
             <h1 className="text-5xl font-bold">
               <Link to="/">
-                <TextRainbow text="About" />
+                <TextRainbow className="font-display" text="About" />
               </Link>
             </h1>
             <p className="py-6">

@@ -4,9 +4,9 @@ import PropTypes from 'prop-types';
 import { Button } from 'react-daisyui';
 import { BsPinAngleFill } from 'react-icons/bs';
 import { FaArrowAltCircleLeft, FaHome } from 'react-icons/fa';
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import SidebarMenu from './SidebarMenu';
-import { useSelector } from 'react-redux';
 
 const SideContent = (props) => {
   const { userInfo } = useSelector((state) => state.auth);
@@ -17,9 +17,8 @@ const SideContent = (props) => {
       {!pin && (
         <div
           onClick={toggleVisible()}
-          className={`fixed top-0 w-screen h-full max-h-screen overflow-auto ${
-            noOverlay ? '' : 'bg-black bg-opacity-50'
-          } ${noOverlayEvent ? 'pointer-events-none' : ''} `}
+          className={`fixed top-0 w-screen h-full max-h-screen overflow-auto ${noOverlay ? '' : 'bg-black bg-opacity-50'
+            } ${noOverlayEvent ? 'pointer-events-none' : ''} `}
         ></div>
       )}
       <div className="relative flex flex-col w-full h-full overflow-visible">
@@ -32,7 +31,7 @@ const SideContent = (props) => {
               <FaArrowAltCircleLeft />
               <TextRainbow
                 text={userInfo?.username || 'Dashboard'}
-                className="text-xl font-extrabold"
+                className="text-xl font-extrabold font-display"
               />
             </Button>
           </div>
@@ -55,11 +54,11 @@ const SideContent = (props) => {
           </div>
           <div className="mt-auto">
             <div className="divider"></div>
-            <div className="p-4 ">
+            <div className="p-4">
               <AuthLogout
                 color="error"
                 variant="outline"
-                className="w-full "
+                className="w-full justify-center items-center"
               />
             </div>
           </div>

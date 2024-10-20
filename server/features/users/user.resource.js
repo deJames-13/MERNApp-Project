@@ -1,6 +1,6 @@
 import { Resource } from '#lib';
 export default class UserResource extends Resource {
-  transform(user) {
+  async transform(user) {
     return {
       id: user._id,
       username: user.username,

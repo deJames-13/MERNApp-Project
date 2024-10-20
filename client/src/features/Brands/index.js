@@ -4,4 +4,3 @@ export * from './brand.routes';
 export * from './brand.slice';
 export * from './brand.validation';
 export * from './components';
-

@@ -1,8 +1,10 @@
-import { GuestSection } from '@partials';
 
 function Home() {
-  return <GuestSection />;
+  return <>
+    Home
+  </>;
 }
 
 export default Home;
 export { default as About } from './About';
+

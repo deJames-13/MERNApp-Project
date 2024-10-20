@@ -1,8 +1,10 @@
+import isEqual from 'lodash/isEqual';
+import PropTypes from 'prop-types';
+
 import { useSlug } from '@common';
 import { FormikForm } from '@common/components';
 import { confirmSave, requestError, toFormData } from '@custom';
-import isEqual from 'lodash/isEqual';
-import PropTypes from 'prop-types';
+import { CarouselComponent } from '@custom/components'; // CAROUSEL
 import { useEffect, useMemo, useState } from 'react';
 import { Button } from 'react-daisyui';
 import { useNavigate } from 'react-router-dom';
@@ -14,6 +16,13 @@ import CategoryWrapper from './CategoryWrapper';
 
 const fields = typeof getFields === 'function' ? getFields() : getFields || [];
 const altFields = typeof getAltFields === 'function' ? getAltFields() : getAltFields || [];
+// CAROUSEL
+const images = [
+  {
+    src: "https://placehold.co/600",
+    alt: "n/a",
+  },
+]
 
 const CategoryForm = ({ title = 'Category Form', action = 'create' }) => {
   /* DECLARATIONS #################################################### */
@@ -81,36 +90,50 @@ const CategoryForm = ({ title = 'Category Form', action = 'create' }) => {
       title={title}
       prevUrl="/dashboard/categories/table"
     >
-      <FormikForm
-        formSchema={categorySchema}
-        formikProps={{
-          initialValues,
-          validationSchema: categoryValidation,
-          onSubmit: onSubmit,
-          enableReinitialize: true,
-        }}
-        className="flex flex-wrap gap-8"
-        element={({ isSubmitting, values }) => {
-          const isFormChanged = !isEqual(initialValues, values);
-          const isProcessing = isSubmitting || isCreating || isUpdating;
-          const isButtonDisabled = isProcessing || isFetching || !isFormChanged;
 
-          return (
-            <div className="flex w-full">
-              <Button
-                variant="outline"
-                type="submit"
-                color="primary"
-                className="max-w-md"
-                disabled={isButtonDisabled}
-              >
-                {isProcessing && <span className="loading loading-spinner"></span>}
-                {action === 'create' ? 'Create Category' : 'Update Category'}
-              </Button>
-            </div>
-          );
-        }}
-      />
+      <div className="flex flex-col gap-4 lg:flex-row items-center lg:items-start">
+
+        {/* CAROUSEL */}
+        <div className="container lg:w-1/3 w-96">
+          <CarouselComponent imageList={
+            category?.images?.length ?
+              category?.images.map((image) => ({ src: image.url, alt: image.alt }))
+              : images} />
+        </div>
+
+        <div className="container w-2/3">
+          <FormikForm
+            formSchema={categorySchema}
+            formikProps={{
+              initialValues,
+              validationSchema: categoryValidation,
+              onSubmit: onSubmit,
+              enableReinitialize: true,
+            }}
+            className="flex flex-wrap gap-8"
+            element={({ isSubmitting, values }) => {
+              const isFormChanged = !isEqual(initialValues, values);
+              const isProcessing = isSubmitting || isCreating || isUpdating;
+              const isButtonDisabled = isProcessing || isFetching || !isFormChanged;
+
+              return (
+                <div className="flex w-full">
+                  <Button
+                    variant="outline"
+                    type="submit"
+                    color="primary"
+                    className="max-w-md"
+                    disabled={isButtonDisabled}
+                  >
+                    {isProcessing && <span className="loading loading-spinner"></span>}
+                    {action === 'create' ? 'Create Category' : 'Update Category'}
+                  </Button>
+                </div>
+              );
+            }}
+          />
+        </div>
+      </div>
     </CategoryWrapper>
   );
 };

@@ -14,7 +14,7 @@ export default [
       {
         path: '/',
         method: METHODS.GET,
-        controller: controller.getALl,
+        controller: controller.getAll,
       },
       {
         path: '/',

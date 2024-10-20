@@ -40,7 +40,7 @@ function DashboardHeader({ toggleVisible, visible }) {
             <FaArrowAltCircleRight />
             <TextRainbow
               text="Dashboard"
-              className="text-xl font-extrabold"
+              className="text-xl font-extrabold font-display"
             />
           </Button>
 

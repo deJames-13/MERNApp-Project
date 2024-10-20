@@ -1,7 +1,7 @@
 import { InputOTP, InputOTPGroup, InputOTPSeparator, InputOTPSlot } from '@common/components/ui/input-otp';
 import React from 'react';
 
-const InputOTPWithSeparator = ({ count = 6, divide = 3 }) => {
+export const InputOTPForm = ({ count = 6, divide = 3 }) => {
   const groups = [];
   let slotIndex = 0;
 
@@ -26,5 +26,4 @@ const InputOTPWithSeparator = ({ count = 6, divide = 3 }) => {
   return <InputOTP maxLength={count}>{groups}</InputOTP>;
 };
 
-export default InputOTPWithSeparator;
 

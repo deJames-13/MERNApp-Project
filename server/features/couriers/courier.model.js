@@ -23,7 +23,7 @@ const Courier = new Schema({
         // required: [true, 'Please enter courier service area'],
         maxLength: [20, 'Courier service area cannot exceed 20 characters'],
       },
-      image: [{ ImageSchema }],
+      images: [ImageSchema],
     },
     { timestamps: true },
   ],

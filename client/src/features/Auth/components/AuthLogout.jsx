@@ -1,23 +1,24 @@
+import { cn } from '@common/lib/utils';
 import { useGetAuth, useLogout } from '@custom';
-import { Button } from 'react-daisyui';
 import { FaArrowRightFromBracket } from 'react-icons/fa6';
 
-export default function AuthLogout(buttonProps) {
+export default function AuthLogout({ iconOnly = false, className, ...props }) {
   const handleLogout = useLogout();
   const { userInfo } = useGetAuth();
   return (
     userInfo && (
-      <form onSubmit={handleLogout}>
-        <Button
-          type="submit"
-          color="primary"
-          variant="outline"
-          {...buttonProps}
-        >
-          <FaArrowRightFromBracket />
-          Log Out
-        </Button>
-      </form>
+      <div>
+        <form onSubmit={handleLogout}>
+          <button
+            type="submit"
+            className={cn("btn btn-outline btn-primary rounded-btn ", className)}
+            {...props}
+          >
+            <FaArrowRightFromBracket />
+            {iconOnly ? '' : 'Logout'}
+          </button>
+        </form>
+      </div>
     )
   );
 }

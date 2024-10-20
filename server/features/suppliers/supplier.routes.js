@@ -9,7 +9,7 @@ export default [
       {
         path: PATHS.ALL,
         method: METHODS.GET,
-        controller: controller.getALl,
+        controller: controller.getAll,
       },
       {
         path: PATHS.EDIT,
@@ -39,3 +39,4 @@ export default [
     ],
   },
 ];
+

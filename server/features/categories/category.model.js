@@ -13,7 +13,7 @@ const Category = new Schema({
       slug: {
         type: String,
       },
-      image: [{ ImageSchema }],
+      images: [ImageSchema],
     },
     { timestamps: true },
   ],

@@ -11,19 +11,33 @@ export class Controller {
   };
 
   // controller functions
-  getALl = async (req, res) => {
-    const data = await this.service?.getAll();
+  search = async (req, res) => {
+    const meta = await this.service._getMeta(req.query, res);
+    const data = await this.service
+      ?.search(req.query.q)
+      .paginate(meta)
+      .filter(req.query.filters || {})
+      .exec();
     const message = data.length ? 'Data collection fetched!' : 'No data found!';
 
-    const resource = this.resource?.collection(data) || data;
-    this.success({ res, message, resource });
+    const resource = (await this.resource?.collection(data)) || data;
+    this.success({ res, message, resource, meta: { ...meta, count: data.length } });
+  };
+
+  getAll = async (req, res) => {
+    const meta = await this.service._getMeta(req.query);
+    const data = await this.service.paginate(meta).exec();
+    const message = data.length ? 'Data collection fetched!' : 'No data found!';
+
+    const resource = (await this.resource?.collection(data)) || data;
+    this.success({ res, message, resource, meta: { ...meta, count: data.length } });
   };
 
   getById = async (req, res) => {
     const data = await this.service?.getById(req.params.id);
     if (!data?._id) return this.error({ res, message: 'Data not found!' });
 
-    const resource = this.resource?.make(data) || data;
+    const resource = (await this.resource?.make(data)) || data;
     this.success({ res, message: 'Data fetched!', resource });
   };
 
@@ -42,7 +56,9 @@ export class Controller {
   };
 
   store = async (req, res, next) => {
-    const validData = await this.validator(req, res, this.rules.create);
+    let validData = req.body;
+    if (!this.rules.create.length) validData = await this.validator(req, res, this.rules.create);
+
     let data = await this.service?.create(validData);
     if (!data._id) return this.error({ res, message: 'Invalid data!' });
 
@@ -52,24 +68,26 @@ export class Controller {
       await data.save();
     }
 
-    const resource = this.resource?.make(data) || data;
+    const resource = (await this.resource?.make(data)) || data;
     this.success({ res, message: 'Data created!', resource });
   };
 
   update = async (req, res, next) => {
-    const validData = await this.validator(req, res, this.rules.update);
+    let validData = req.body;
+    if (!this.rules.create.length) validData = await this.validator(req, res, this.rules.update);
+
     const data = await this.service?.update(req.params.id, validData);
     if (!data._id) return this.error({ res, message: 'Invalid data!' });
 
     if (req.file || req.files || this.service.hasField('images')) {
       const images = this.addImage(req);
-      const oldImages = new Set(data.images.map((image) => image.public_id));
+      const oldImages = new Set((data.images || []).map((image) => image.public_id));
       const newImages = images.filter((image) => !oldImages.has(image.public_id));
       data.images = [...(data.images || []), ...newImages];
       await data.save();
     }
 
-    const resource = this.resource?.make(data) || data;
+    const resource = (await this.resource?.make(data)) || data;
     this.success({ res, message: 'Data updated!', resource });
   };
 

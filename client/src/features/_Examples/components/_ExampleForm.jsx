@@ -1,8 +1,10 @@
+import isEqual from 'lodash/isEqual';
+import PropTypes from 'prop-types';
+
 import { useSlug } from '@common';
 import { FormikForm } from '@common/components';
 import { confirmSave, requestError, toFormData } from '@custom';
-import isEqual from 'lodash/isEqual';
-import PropTypes from 'prop-types';
+import { CarouselComponent } from '@custom/components'; // CAROUSEL
 import { useEffect, useMemo, useState } from 'react';
 import { Button } from 'react-daisyui';
 import { useNavigate } from 'react-router-dom';
@@ -14,6 +16,13 @@ import _ExampleWrapper from './_ExampleWrapper';
 
 const fields = typeof getFields === 'function' ? getFields() : getFields || [];
 const altFields = typeof getAltFields === 'function' ? getAltFields() : getAltFields || [];
+// CAROUSEL
+const images = [
+  {
+    src: "https://placehold.co/600",
+    alt: "n/a",
+  },
+]
 
 const _ExampleForm = ({ title = '_Example Form', action = 'create' }) => {
   /* DECLARATIONS #################################################### */
@@ -24,6 +33,7 @@ const _ExampleForm = ({ title = '_Example Form', action = 'create' }) => {
   const [update_Example, { isLoading: isUpdating }] = _exampleApi.useUpdate_ExampleMutation();
   const [get_Example, { isLoading: isFetching }] = _exampleApi.useGet_ExampleMutation();
   const { slug, setSlug } = useSlug();
+  /* END DECLARATIONS ################################################ */
 
   const initialValues = useMemo(
     () =>
@@ -33,7 +43,6 @@ const _ExampleForm = ({ title = '_Example Form', action = 'create' }) => {
       }, {}),
     [_example, _exampleSchema, action]
   );
-  /* END DECLARATIONS ################################################ */
 
   const handleCreate = async (values) => {
     await create_Example(values).unwrap();
@@ -81,36 +90,50 @@ const _ExampleForm = ({ title = '_Example Form', action = 'create' }) => {
       title={title}
       prevUrl="/dashboard/_examples/table"
     >
-      <FormikForm
-        formSchema={_exampleSchema}
-        formikProps={{
-          initialValues,
-          validationSchema: _exampleValidation,
-          onSubmit: onSubmit,
-          enableReinitialize: true,
-        }}
-        className="flex flex-wrap gap-8"
-        element={({ isSubmitting, values }) => {
-          const isFormChanged = !isEqual(initialValues, values);
-          const isProcessing = isSubmitting || isCreating || isUpdating;
-          const isButtonDisabled = isProcessing || isFetching || !isFormChanged;
 
-          return (
-            <div className="flex w-full">
-              <Button
-                variant="outline"
-                type="submit"
-                color="primary"
-                className="max-w-md"
-                disabled={isButtonDisabled}
-              >
-                {isProcessing && <span className="loading loading-spinner"></span>}
-                {action === 'create' ? 'Create _Example' : 'Update _Example'}
-              </Button>
-            </div>
-          );
-        }}
-      />
+      <div className="flex flex-col gap-4 lg:flex-row items-center lg:items-start">
+
+        {/* CAROUSEL */}
+        <div className="container lg:w-1/3 w-96">
+          <CarouselComponent images={
+            _example?.images?.length ?
+              _example?.images.map((image) => ({ src: image.url, alt: image.alt }))
+              : images} />
+        </div>
+
+        <div className="container w-2/3">
+          <FormikForm
+            formSchema={_exampleSchema}
+            formikProps={{
+              initialValues,
+              validationSchema: _exampleValidation,
+              onSubmit: onSubmit,
+              enableReinitialize: true,
+            }}
+            className="flex flex-wrap gap-8"
+            element={({ isSubmitting, values }) => {
+              const isFormChanged = !isEqual(initialValues, values);
+              const isProcessing = isSubmitting || isCreating || isUpdating;
+              const isButtonDisabled = isProcessing || isFetching || !isFormChanged;
+
+              return (
+                <div className="flex w-full">
+                  <Button
+                    variant="outline"
+                    type="submit"
+                    color="primary"
+                    className="max-w-md"
+                    disabled={isButtonDisabled}
+                  >
+                    {isProcessing && <span className="loading loading-spinner"></span>}
+                    {action === 'create' ? 'Create _Example' : 'Update _Example'}
+                  </Button>
+                </div>
+              );
+            }}
+          />
+        </div>
+      </div>
     </_ExampleWrapper>
   );
 };

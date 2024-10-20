@@ -13,11 +13,7 @@ const Brand = new Schema({
       slug: {
         type: String,
       },
-      description: {
-        type: String,
-        required: [true, 'Brand description is required'],
-      },
-      image: [{ ImageSchema }],
+      images: [ImageSchema],
     },
     { timestamps: true },
   ],
@@ -27,4 +23,3 @@ Brand.statics.fillables = [];
 Brand.statics.hidden = [];
 
 export default Brand.makeModel();
-

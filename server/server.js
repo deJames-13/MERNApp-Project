@@ -42,4 +42,7 @@ const server = () => {
     console.log(`Server is running on port ${PORT}`);
   });
 };
-connectDB(MONGO_URI, server);
+
+export const run = () => {
+  connectDB(MONGO_URI, server);
+};

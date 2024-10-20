@@ -1,25 +1,26 @@
 export class Resource {
   constructor(data) {
     this.data = data;
-    return this;
   }
 
-  static make(data) {
-    return new this(data).toArray();
+  static async make(data) {
+    return await new this(data).toArray();
   }
 
-  toArray() {
+  async toArray() {
     if (Array.isArray(this.data)) {
-      return this.data.map((item) => this.transform(item?.toJSON()));
+      return await Promise.all(
+        this.data.map(async (item) => await this.transform(item?.toJSON()))
+      );
     }
-    return this.transform(this.data?.toJSON());
+    return await this.transform(this.data?.toJSON());
   }
 
-  toJson() {
+  toJSON() {
     return JSON.stringify(this.toArray());
   }
 
-  transform(item) {
+  async transform(item) {
     return item;
   }
 
@@ -44,8 +45,10 @@ export class Resource {
     return new Date(date).toLocaleString('en-US', options);
   }
 
-  static collection(data) {
+  static async collection(data) {
     if (!data) return [];
-    return data.map((item) => new this(item).toArray());
+    return await Promise.all(
+      data.map(async (item) => await new this(item).toArray())
+    );
   }
 }
