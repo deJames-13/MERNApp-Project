@@ -21,7 +21,7 @@ export function Shop() {
           <h1 className="text-5xl font-display">
             Our Products
           </h1>
-          <SelectComponent />
+          {/* <SelectComponent /> */}
         </div>
         <ProductGrid />
       </div>

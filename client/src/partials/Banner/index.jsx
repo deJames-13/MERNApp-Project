@@ -4,7 +4,7 @@ import React from 'react';
 export function Banner({ label = null, noLabel = false, bgImage = null }) {
   return (
     <div
-      className="flex justify-center items-center min-h-96 parallax-banner"
+      className="hidden md:flex justify-center items-center min-h-96 parallax-banner"
       style={{
         backgroundImage: `url(${bgImage || default_banner_bg})`,
         backgroundSize: 'cover',

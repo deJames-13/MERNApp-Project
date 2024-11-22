@@ -79,7 +79,7 @@ export default function ProductDisplay({ data = productExample, children }) {
   }, [])
 
   return (
-    <div className='w-screen min-h-screen flex lg:flex-row items-start'>
+    <div className='w-screen min-h-screen flex flex-col lg:flex-row items-start'>
       <div className='w-full'>
         <div className="overflow-hidden max-h-[42rem] bg-base-200/30 border-y border-base-content/10 p-1">
           <Breadcrumbs />
@@ -91,7 +91,7 @@ export default function ProductDisplay({ data = productExample, children }) {
         {children}
       </div>
 
-      <div className='py-4 px-8 container max-w-sm border border-base-content/10 bg-base-100'>
+      <div className='py-4 px-8 container lg:max-w-sm border border-base-content/10 bg-base-100'>
         <div className="flex items-end justify-end">
           <BackButton className="btn-ghost" />
         </div>
@@ -144,7 +144,7 @@ export default function ProductDisplay({ data = productExample, children }) {
           </button>
         </div>
         <p className='text-xs italic font-light'>
-          {product?.footerMessage || 'We ship nationwide!'}
+          {product?.footerMessage || 'allah!'}
         </p>
 
       </div>

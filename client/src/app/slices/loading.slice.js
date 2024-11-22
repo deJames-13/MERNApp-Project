@@ -4,6 +4,7 @@ const loadingSlice = createSlice({
   initialState: {
     isLoading: false,
     activeRequests: 0,
+    silentLoading: false,
   },
   reducers: {
     startLoading: (state) => {
@@ -16,8 +17,11 @@ const loadingSlice = createSlice({
         state.isLoading = false;
       }
     },
+    setSilentLoading: (state, action) => {
+      state.silentLoading = action.payload;
+    }
   },
 });
 
-export const { startLoading, stopLoading } = loadingSlice.actions;
+export const { startLoading, stopLoading,setSilentLoading } = loadingSlice.actions;
 export const loadingReducer = loadingSlice.reducer;

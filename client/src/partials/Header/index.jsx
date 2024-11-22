@@ -68,6 +68,16 @@ function Header({ clickLogo }) {
                     Profile
                   </Link>
                 </li>
+                <li>
+                  <Link to="/cart" className="justify-between">
+                    Cart
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/orders" className="justify-between">
+                    Orders
+                  </Link>
+                </li>
                 <Dropdown.Item>Settings</Dropdown.Item>
                 <Dropdown.Item onClick={handleLogout}>
                   Logout

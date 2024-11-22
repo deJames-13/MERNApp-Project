@@ -12,7 +12,7 @@ import router from '@app/routes';
 import React from 'react';
 function App() {
   useNotification();
-  const isLoading = useSelector(state => state.loading.isLoading);
+  const { isLoading, silentLoading } = useSelector(state => state.loading);
 
   return (
     <React.StrictMode>
@@ -29,7 +29,7 @@ function App() {
         stacked
       />
       <RouterProvider router={router} className={isLoading ? 'cursor-wait pointer-events-none' : ''} />
-      {isLoading &&
+      {isLoading && !silentLoading &&
         <div className="fixed top-0 left-0 z-[100] h-screen w-screen  cursor-wait">
           <Spinner />
         </div>

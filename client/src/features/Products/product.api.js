@@ -20,6 +20,14 @@ const productApi = apiSlice.injectEndpoints({
         headers,
       }),
     }),
+    getFiltered: build.mutation({
+      query: (query) => ({
+        url: `${apiUrl}/filter`,
+        method: 'POST',
+        body: query,
+        headers,
+      }),
+    }),
     getProduct: build.mutation({
       query: (slug) => ({
         url: `${apiUrl}/slug/${slug}`,

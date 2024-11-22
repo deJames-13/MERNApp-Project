@@ -1,5 +1,5 @@
 import { apiSlice } from '@app/config';
-import { authReducer, cartReducer, orderReducer } from '@features';
+import { authReducer, cartReducer, orderReducer, productReducer } from '@features';
 import { combineReducers } from '@reduxjs/toolkit';
 import { loadingReducer, notifReducer, themeReducer } from './slices';
 
@@ -10,6 +10,7 @@ const rootReducer = combineReducers({
   auth: authReducer,
   cart: cartReducer,
   order: orderReducer,
+  product: productReducer,
   [apiSlice.reducerPath]: apiSlice.reducer,
 });
 

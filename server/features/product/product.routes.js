@@ -12,6 +12,11 @@ export default [
         controller: controller.getAll,
       },
       {
+        path: '/filter',
+        method: METHODS.POST,
+        controller: controller.getFilteredProducts,
+      },
+      {
         path: PATHS.EDIT,
         method: METHODS.PATCH,
         controller: [...protectAndPermit(READ_WRITE), upload.array('image'), controller.update],

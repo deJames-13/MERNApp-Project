@@ -12,6 +12,17 @@ class ProductController extends Controller {
     update: productUpdateRules,
   };
 
+  getFilteredProducts = async (req, res) => {
+    const data = req.body;
+    const meta = await this.service._getMeta(data.queries, res);
+    const products = await this.service.filterProducts(data, meta);
+    const message = products.length ? 'Data collection fetched!' : 'No data found!';
+
+    const resource = (await this.resource?.collection(products)) || products; 
+    this.success({ res, message, resource, meta: {...meta, count:data.length} });
+
+  }
+
   // Method to get product by slug
   getBySlug = async (req, res) => {
     const { slug } = req.params;
