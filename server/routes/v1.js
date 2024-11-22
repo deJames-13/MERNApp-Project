@@ -16,6 +16,7 @@ const v1 = [
   ...features.courierRoutes,
   ...features.supplierRoutes,
   ...features.userRoutes,
+  ...features.reviewRoutes,
 ];
 
 export default v1;

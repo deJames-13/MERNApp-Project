@@ -13,3 +13,4 @@ export * from './categories/index.js';
 
 export * from './notifications/index.js';
 
+export * from './reviews/index.js';

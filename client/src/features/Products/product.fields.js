@@ -86,15 +86,15 @@ const getFields = () => [
   {
     label: 'Brand',
     name: 'brand',
-    type: 'select', // Assuming it's a dropdown/select field
-    options: [], // This will be populated dynamically with API call
+    type: 'select', 
+    options: [], 
     outerStyle: 'w-full col-span-3 row-span-2 md:col-span-1',
   },
   {
     label: 'Supplier',
     name: 'supplier',
-    type: 'select', // Assuming it's a dropdown/select field
-    options: [], // This will be populated dynamically with API call
+    type: 'select',
+    options: [], 
     outerStyle: 'w-full col-span-3 row-span-2 md:col-span-1',
   },
   {

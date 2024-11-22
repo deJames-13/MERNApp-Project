@@ -29,6 +29,7 @@
     "#firebase/*": "./firebase/*.js"
   },
   "dependencies": {
+    "bad-words": "^4.0.0",
     "bcryptjs": "^2.4.3",
     "change-case": "^5.4.4",
     "cloudinary": "^1.41.3",

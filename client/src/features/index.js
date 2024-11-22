@@ -10,3 +10,4 @@ export * from './Cart/index.js';
 export * from './Orders/index.js';
 export * from './Wishlist/index.js';
 export * from './Categories/index.js';
+export * from './Reviews/index.js';
